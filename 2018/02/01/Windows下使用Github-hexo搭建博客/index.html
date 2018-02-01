@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Thu Feb 01 2018 22:53:16 GMT+0800">
-        <meta property="article:modified_time" content="Thu Feb 01 2018 22:54:42 GMT+0800">
+        <meta property="article:modified_time" content="Thu Feb 01 2018 23:04:18 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "http://zhaoyiming.github.io/2018/02/01/Windows下使用Github-hexo搭建博客/index.html",
     "headline": "Windows下使用Github+hexo搭建博客",
     "datePublished": "Thu Feb 01 2018 22:53:16 GMT+0800",
-    "dateModified": "Thu Feb 01 2018 22:54:42 GMT+0800",
+    "dateModified": "Thu Feb 01 2018 23:04:18 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "Ming",
@@ -493,15 +493,15 @@
         <h1 id="Windows下在Github上搭建hexo博客"><a href="#Windows下在Github上搭建hexo博客" class="headerlink" title="Windows下在Github上搭建hexo博客"></a>Windows下在Github上搭建hexo博客</h1><p>tags： 博客搭建 Windows hexo</p>
 <hr>
 <h2 id="关于第一篇技术博客，介绍如何在Windows环境下通过Github-pages搭建hexo，包括如何从WordPress转移博客到hexo上。"><a href="#关于第一篇技术博客，介绍如何在Windows环境下通过Github-pages搭建hexo，包括如何从WordPress转移博客到hexo上。" class="headerlink" title="关于第一篇技术博客，介绍如何在Windows环境下通过Github pages搭建hexo，包括如何从WordPress转移博客到hexo上。"></a>关于第一篇技术博客，介绍如何在Windows环境下通过Github pages搭建hexo，包括如何从WordPress转移博客到hexo上。</h2><h2 id="hexo搭建"><a href="#hexo搭建" class="headerlink" title="hexo搭建"></a>hexo搭建</h2><h3 id="搭建博客前小小的工作"><a href="#搭建博客前小小的工作" class="headerlink" title="搭建博客前小小的工作"></a>搭建博客前小小的工作</h3><h4 id="1-Github注册"><a href="#1-Github注册" class="headerlink" title="1.Github注册"></a>1.Github注册</h4><p>在此不再赘述，在<a href="https://github.com/" target="_blank" rel="noopener">Github官网</a>注册即可。</p>
-<h4 id="2-安装node-js"><a href="#2-安装node-js" class="headerlink" title="2.安装node.js"></a>2.安装node.js</h4><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js官网</a>下载安装。安装完毕后打开命令行界面输入<code>node -v</code>如图。<br><img src="http://imglf4.nosdn.127.net/img/WU1zZkNURmhGdm5la21NN1A5OVhFZ2N4SVFVWmpzRlRnVXpqTDBaV3ZrM21DSGIxck42Q3FBPT0.png?imageView&amp;amp;amp;thumbnail=500x0&amp;amp;amp;quality=96&amp;amp;amp;stripmeta=0" alt="node.js成功安装截图"></p>
-<h4 id="3-安装git"><a href="#3-安装git" class="headerlink" title="3.安装git"></a>3.安装git</h4><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git官网</a>安装提示默认选项安装即可。安装完毕后打开命令行输入<code>git --version</code>成功安装如图所示。<br><img src="http://imglf5.nosdn.127.net/img/WU1zZkNURmhGdm4wbHJBR3d5TGtRRUgydHZyOFllY1FqR1RYS212aDJsMnlDMHAvODVxWjhRPT0.png?imageView&amp;amp;amp;thumbnail=500x0&amp;amp;amp;quality=96&amp;amp;amp;stripmeta=0" alt="git成功安装截图"><br>git安装成功后需要添加邮箱和用户名，将代码中双引号中的部分替换成你的用户名，范例邮箱替换成你的邮箱。</p>
+<h4 id="2-安装node-js"><a href="#2-安装node-js" class="headerlink" title="2.安装node.js"></a>2.安装node.js</h4><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js官网</a>下载安装。安装完毕后打开命令行界面输入<code>node -v</code>如图。<br><img src="http://imglf4.nosdn.127.net/img/WU1zZkNURmhGdm5la21NN1A5OVhFZ2N4SVFVWmpzRlRnVXpqTDBaV3ZrM21DSGIxck42Q3FBPT0.png?imageView&amp;amp;amp;amp;thumbnail=500x0&amp;amp;amp;amp;quality=96&amp;amp;amp;amp;stripmeta=0" alt="node.js成功安装截图"></p>
+<h4 id="3-安装git"><a href="#3-安装git" class="headerlink" title="3.安装git"></a>3.安装git</h4><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git官网</a>安装提示默认选项安装即可。安装完毕后打开命令行输入<code>git --version</code>成功安装如图所示。<br><img src="http://imglf5.nosdn.127.net/img/WU1zZkNURmhGdm4wbHJBR3d5TGtRRUgydHZyOFllY1FqR1RYS212aDJsMnlDMHAvODVxWjhRPT0.png?imageView&amp;amp;amp;amp;thumbnail=500x0&amp;amp;amp;amp;quality=96&amp;amp;amp;amp;stripmeta=0" alt="git成功安装截图"><br>git安装成功后需要添加邮箱和用户名，将代码中双引号中的部分替换成你的用户名，范例邮箱替换成你的邮箱。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;John Doe&quot; </span><br><span class="line">$ git config --global user.email johndoe@example.com</span><br></pre></td></tr></table></figure>
 <p>添加完后我们需要添加SSH Key到你的Github账户，添加SSH Key是为了让你的Github账户可以绑定你的机器。<br>打开Git Bash执行代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;zym736531683@gmail.com&quot;</span><br></pre></td></tr></table></figure>
-<p>Git Bash一般可以在左下角开始菜单栏中找到，同样将邮箱替换为你的邮箱。成功之后会在用户的.ssh目录下生成两个文件，如下图。.shh目录一般在:c盘 -&gt; 用户（user）-&gt; 用户名（我的为鸣）-&gt;.ssh<br><a href="http://imglf3.nosdn.127.net/img/WU1zZkNURmhGdms3ZmpBQldTYTJBNnZRWWJpZFlCLyticHFSdnlIQ0lwZktWaERwSmlOZm9BPT0.png?imageView&amp;amp;amp;thumbnail=500x0&amp;amp;amp;quality=96&amp;amp;amp;stripmeta=0" target="_blank" rel="noopener">.ssh目录</a><br>使用<a href="https://notepad-plus-plus.org/" target="_blank" rel="noopener">Notepad++</a>或其他应用打开<code>id rsa.pub</code>文件复制所有内容<br>打开Github-&gt; 点击头像 -&gt; Settings -&gt; SSH and GPG keys -&gt;New SSH keys -&gt; 粘贴刚才复制的内容至Key框中</p>
+<p>Git Bash一般可以在左下角开始菜单栏中找到，同样将邮箱替换为你的邮箱。成功之后会在用户的.ssh目录下生成两个文件，如下图。.shh目录一般在:c盘 -&gt; 用户（user）-&gt; 用户名（我的为鸣）-&gt;.ssh<br><img src="http://imglf3.nosdn.127.net/img/WU1zZkNURmhGdms3ZmpBQldTYTJBNnZRWWJpZFlCLyticHFSdnlIQ0lwZktWaERwSmlOZm9BPT0.png?imageView&amp;amp;amp;amp;thumbnail=500x0&amp;amp;amp;amp;quality=96&amp;amp;amp;amp;stripmeta=0" alt=".ssh目录"><br>使用<a href="https://notepad-plus-plus.org/" target="_blank" rel="noopener">Notepad++</a>或其他应用打开<code>id rsa.pub</code>文件复制所有内容<br>打开Github-&gt; 点击头像 -&gt; Settings -&gt; SSH and GPG keys -&gt;New SSH keys -&gt; 粘贴刚才复制的内容至Key框中</p>
 <h3 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h3><h4 id="hexo本地设置"><a href="#hexo本地设置" class="headerlink" title="hexo本地设置"></a>hexo本地设置</h4><p>在硬盘中新建一个文件夹用来存放你的博客数据，右键文件夹点击<code>Git Bash Here</code><br>在弹出的CLI中输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>安装完毕后输入hexo检测是否安装成功<br><img src="http://imglf4.nosdn.127.net/img/WU1zZkNURmhGdms3ZmpBQldTYTJBMEg3NWlFSzlpbWpmRlNoMld2OTBDZU8rVnEvYW12bVFnPT0.png?imageView&amp;amp;amp;thumbnail=500x0&amp;amp;amp;quality=96&amp;amp;amp;stripmeta=0" alt="hexo安装成功截图"><br>需要注意的是，在输入命令后CLI可能没有立即反应，耐心等待即可。<br>初始化hexo,后一个hexo为创建文件夹名，可修改</p>
+<p>安装完毕后输入hexo检测是否安装成功<br><img src="http://imglf4.nosdn.127.net/img/WU1zZkNURmhGdms3ZmpBQldTYTJBMEg3NWlFSzlpbWpmRlNoMld2OTBDZU8rVnEvYW12bVFnPT0.png?imageView&amp;amp;amp;amp;thumbnail=500x0&amp;amp;amp;amp;quality=96&amp;amp;amp;amp;stripmeta=0" alt="hexo安装成功截图"><br>需要注意的是，在输入命令后CLI可能没有立即反应，耐心等待即可。<br>初始化hexo,后一个hexo为创建文件夹名，可修改</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init hexo</span><br></pre></td></tr></table></figure>
 <p>初始化成功后显示<code>Start blogging with Hexo!</code><br>接着依次输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd hexo</span><br><span class="line">npm install     // 安装依赖文件</span><br><span class="line">hexo generate   //生成静态文件</span><br></pre></td></tr></table></figure>
@@ -666,7 +666,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/Hifi-Ending/">Hifi Ending<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/Hifi-Ending/">Hifi Ending<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/">hexo<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/hexo/博客/">博客<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
