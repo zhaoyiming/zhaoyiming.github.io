@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Tue Feb 13 2018 11:52:43 GMT+0800">
-        <meta property="article:modified_time" content="Sat Feb 24 2018 20:25:25 GMT+0800">
+        <meta property="article:modified_time" content="Sat Mar 10 2018 15:27:26 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "http://zhaoyiming.github.io/2018/02/13/安卓开发中遇到的问题/index.html",
     "headline": "安卓开发中遇到的问题",
     "datePublished": "Tue Feb 13 2018 11:52:43 GMT+0800",
-    "dateModified": "Sat Feb 24 2018 20:25:25 GMT+0800",
+    "dateModified": "Sat Mar 10 2018 15:27:26 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "Ming",
@@ -355,7 +355,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于使用沉浸式状态栏后，Toast通知文字不居中。"><span class="post-toc-number">1.</span> <span class="post-toc-text">关于使用沉浸式状态栏后，Toast通知文字不居中。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于toolbar中返回按钮点击无效"><span class="post-toc-number">2.</span> <span class="post-toc-text">关于toolbar中返回按钮点击无效</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于Tablayout-ViewPages-Fragment实现顶部导航栏"><span class="post-toc-number">3.</span> <span class="post-toc-text">关于Tablayout+ViewPages+Fragment实现顶部导航栏</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现步骤："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">实现步骤：</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于使用沉浸式状态栏后，Toast通知文字不居中。"><span class="post-toc-number">1.</span> <span class="post-toc-text">关于使用沉浸式状态栏后，Toast通知文字不居中。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于toolbar中返回按钮点击无效"><span class="post-toc-number">2.</span> <span class="post-toc-text">关于toolbar中返回按钮点击无效</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于Tablayout-ViewPages-Fragment实现顶部导航栏"><span class="post-toc-number">3.</span> <span class="post-toc-text">关于Tablayout+ViewPages+Fragment实现顶部导航栏</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现步骤："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">实现步骤：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于Radiobutton选中时颜色改变"><span class="post-toc-number">4.</span> <span class="post-toc-text">关于Radiobutton选中时颜色改变</span></a></li></ol>
     </ul>
     
 
@@ -510,7 +510,12 @@
 <li>创建Fragment对应Activity</li>
 <li>定义适配器Adapter类：MyFragmentPagerAdapter</li>
 <li>修改主布局activity</li>
-<li>修改主活动MainActivity</li>
+<li>修改主活动MainActivity<h3 id="关于Radiobutton选中时颜色改变"><a href="#关于Radiobutton选中时颜色改变" class="headerlink" title="关于Radiobutton选中时颜色改变"></a>关于Radiobutton选中时颜色改变</h3>开始想到创建颜色选择器，<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+     &lt;item android:color=&quot;@color/radioButtonChecked&quot; android:state_checked=&quot;true&quot;&gt;&lt;/item&gt;
+     &lt;item android:color=&quot;@color/radioButtonunChecked&quot; android:state_checked=&quot;false&quot;&gt;&lt;/item&gt;
+&lt;/se
+</code></pre>在radiogroup设置为<code>Android:textcolor</code>发现无效,设置为<code>Andoroid:backgroud</code>时出现崩溃。<br>经过多处查证后，一般都为重绘改变颜色。见<a href="http://bbs.csdn.net/topics/60138033" target="_blank" rel="noopener">csdn楼层</a>。<br>先挖坑待填。</li>
 </ol>
 
         
