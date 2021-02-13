@@ -1,9 +1,9 @@
 ﻿---
 title: 5$首年付vps
 date: 2018-03-01 12:01:26
-tags:
+tags: vps
 catalogue:
-- 服务器
+- 学外拓展
 ---
 ## 准备工作：
 + 一个用于校园认证的大学邮箱。
@@ -31,8 +31,8 @@ catalogue:
 成功进入服务器后，参见秋水大大的博客直接设置即可。设置完后，在相应系统的应用中输入设置的信息即可。
 
 
-  [1]: http://imglf4.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIVkhETnFrV2o5MXVrQmhUMlUvN0FSTnFEeHhmV01MOTdnPT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0
-  [2]: http://imglf5.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIZjBJQmQwcU1mS3dKbkFMZTl3VWU2QUJBdVdzc3FSaXV3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0
-  [3]: http://imglf3.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIU0V3eHAvK3ZUSENJK0RDRjJjN1phdmluelNVWUtPbkx3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0
-  [4]: http://imglf6.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIZG94MGR2d1ZDbzAyMDlQUzZFMDEzZXQ0MktRWTVOeCtRPT0.jpg?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg
-  [5]: http://imglf6.nosdn.127.net/img/WU1zZkNURmhGdmxBa3hFSWFKeEdZZ1VrSFoxZkhYNGxCSmhzQ24vRGpvTmJuKzZQWXNQWWNRPT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0
+[1]: http://imglf4.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIVkhETnFrV2o5MXVrQmhUMlUvN0FSTnFEeHhmV01MOTdnPT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0
+[2]: http://imglf5.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIZjBJQmQwcU1mS3dKbkFMZTl3VWU2QUJBdVdzc3FSaXV3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0
+[3]: http://imglf3.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIU0V3eHAvK3ZUSENJK0RDRjJjN1phdmluelNVWUtPbkx3PT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0
+[4]: http://imglf6.nosdn.127.net/img/WU1zZkNURmhGdm16M0pieWhqMDNIZG94MGR2d1ZDbzAyMDlQUzZFMDEzZXQ0MktRWTVOeCtRPT0.jpg?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg
+[5]: http://imglf6.nosdn.127.net/img/WU1zZkNURmhGdmxBa3hFSWFKeEdZZ1VrSFoxZkhYNGxCSmhzQ24vRGpvTmJuKzZQWXNQWWNRPT0.png?imageView&thumbnail=500x0&quality=96&stripmeta=0

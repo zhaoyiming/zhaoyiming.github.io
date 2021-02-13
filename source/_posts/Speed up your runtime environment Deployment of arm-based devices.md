@@ -1,4 +1,11 @@
-# Speed up your runtime environment Deployment of arm-based devices
+---
+title: Speed up your runtime environment Deployment of arm-based devices
+date: 2021-02-13 20:13:43
+tags: arm 环境部署
+comments: 
+categories: 
+- 嵌入式
+---
 
 ### Introduction
 

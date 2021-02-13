@@ -1,7 +1,9 @@
 ﻿---
 title: java和android中的回调方法
 date: 2018-03-18 21:52:07
-tags:
+tags: java
+categories: 
+- 基础
 ---
 最近看第一行代码，遇到了回调这个问题，尽管书中其他知识很细致，却没有对这个作过多解释，看来我的java没学好。这里作一个学习总结。
 学习主要参考这篇[文章](http://blog.csdn.net/u012441545/article/details/52259466)。

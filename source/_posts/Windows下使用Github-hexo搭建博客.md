@@ -1,10 +1,9 @@
 ---
 title: Windows下使用Github+hexo搭建博客
 date: 2018-02-01 22:53:16
-categories:
-  - 博客
-  - hexo
 tags: 博客 hexo
+categories: 
+- 学外拓展
 ---
 
 # Windows下在Github上搭建hexo博客
