@@ -26,7 +26,49 @@ categories:
 
 ### 基于OpenCV-python的yolov4
 
-我们知道OpenCV4已经内置了yolov4的调用，所以我们使用pip安装`opencv-python==4.4.0`，使用内置函数进行调用，可以正常使用，推理时间为4s左右，满意。
+我们知道OpenCV4已经内置了yolov4的调用，所以我们使用pip安装`opencv-python==4.4.0`，使用内置函数进行调用，可以正常使用，推理时间为4s左右，满意。简单调用一个代码：
+
+```
+import cv2 as cv
+import time
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+index = basedir.rfind('/')
+basedir = basedir[:index]
+model_dir=basedir+'/ming_net/'
+
+def uav_detect(img_name, img):
+    net = cv.dnn_DetectionModel(model_dir+'yolov4.cfg', model_dir+'yolov4.weights')
+    net.setInputSize(320, 320)
+    net.setInputScale(1.0 / 255)
+    net.setInputSwapRB(True)
+    frame = cv.imread(img)
+    with open(model_dir+'coco.names', 'rt') as f:
+        names = f.read().rstrip('\n').split('\n')
+    startTime = time.time()
+    classes, confidences, boxes = net.detect(frame, confThreshold=0.1, nmsThreshold=0.4)
+    endTime = time.time()
+    print("Time: {}s".format(endTime - startTime))
+
+    for classId, confidence, box in zip(classes.flatten(), confidences.flatten(), boxes):
+        if classId==0:
+            coordinates = []
+            boxes_item_package = {}
+            label = '%.2f' % confidence
+            label = '%s: %s' % (names[classId], label)
+            labelSize, baseLine = cv.getTextSize(label, cv.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+            left, top, width, height = box
+            top = max(top, labelSize[1])
+            cv.rectangle(frame, box, color=(0, 255, 0), thickness=1)
+            cv.rectangle(frame, (left, top - labelSize[1]), (left + labelSize[0], top + baseLine), (0, 0, 255), cv.FILLED)
+            cv.putText(frame, label, (left, top), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
+    
+    cv.waitKey(0)
+    return frame
+
+
+```
 
 
 
