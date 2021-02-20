@@ -14,8 +14,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://zhaoyiming.github.io
 root: /
-#permalink: :year/:month/:day/:title/
-permalink: :year/:id/
+permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
