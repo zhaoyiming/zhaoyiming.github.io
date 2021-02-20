@@ -1,7 +1,8 @@
 ﻿---
 title: java和android中的回调方法
 date: 2018-03-18 21:52:07
-tags: java
+tags: 
+- java
 categories: 
 - 基础
 ---

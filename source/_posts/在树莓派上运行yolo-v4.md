@@ -1,10 +1,10 @@
 ---
 title: 在树莓派上运行yolo v4
 date: 2021-02-13 22:13:43
-tags: arm Neural-Network
-
+tags: 
+- arm
+- NeuralNetwork
 categories: 
-
 - 嵌入式
 
 ---

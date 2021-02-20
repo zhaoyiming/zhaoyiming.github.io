@@ -1,7 +1,8 @@
 ---
 title: DenseNet in mindspore
 date: 2020-09-02 10:11:26
-tags: Neural-Network
+tags: 
+- NeuralNetwork
 ---
 
 # DenseNet in MindSpore

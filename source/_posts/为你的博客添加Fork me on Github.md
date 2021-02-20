@@ -1,7 +1,9 @@
 ﻿---
 title: 为你的博客添加Fork me on Github
 date: 2018-02-05 10:23:53
-tags: 博客 hexo
+tags: 
+- 博客
+- hexo
 categories: 
 - 学外拓展
 ---

@@ -1,7 +1,9 @@
 ---
 title: 使用arm64架构物理机构建K8s(Kubernetes)集群
 date: 2020-12-02 20:11:26
-tags: arm 环境部署
+tags: 
+- arm
+- 环境部署
 categories: 
 - 嵌入式
 ---
