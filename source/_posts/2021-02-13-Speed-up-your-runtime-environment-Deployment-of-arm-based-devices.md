@@ -65,6 +65,10 @@ The simplest method is the following script:
 ```
 # replace proper mirror source with https:xxx
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+or
+pip config set global.index-url http://pypi.douban.com/simple
+or use
+pip install xxx -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 ```
 
 Then you can apply `pip install xxx` and Enjoy it.

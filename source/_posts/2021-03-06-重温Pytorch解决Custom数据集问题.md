@@ -2,9 +2,9 @@
 title: 重温PyTorch解决Custom dataset问题
 date: 2021-03-06 15:13:43
 tags:
-- Neural-Network
+- NeuralNetwork
 categories: 
-- Neural-Network
+- NeuralNetwork
 ---
 
 ### 主要问题
