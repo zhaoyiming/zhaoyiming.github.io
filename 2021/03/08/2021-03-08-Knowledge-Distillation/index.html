@@ -16,7 +16,7 @@
   <meta name="description" content>
   <meta name="author" content="Ming">
   <meta name="keywords" content>
-  <title>catalog和category的区别 - Momo</title>
+  <title>Knowledge Distillation - Momo</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 
@@ -156,7 +156,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="catalog和category的区别">
+            <span class="h2" id="subtitle" title="Knowledge Distillation">
               
             </span>
 
@@ -166,8 +166,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2018-02-10 13:44" pubdate>
-        2018年2月10日 下午
+      <time datetime="2021-03-08 14:13" pubdate>
+        2021年3月8日 下午
       </time>
     </span>
   
@@ -178,7 +178,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      76 字
+      116 字
     </span>
   
 
@@ -226,19 +226,18 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">catalog和category的区别</h1>
+            <h1 style="display: none">Knowledge Distillation</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月5日 下午
+                  本文最后更新于：2021年3月9日 上午
                 
               </p>
             
             <div class="markdown-body">
-              <p>#Difference between the “catalog” and “category”?</p>
-<p>A catalog is a list of items in some order or system of classification.<br>It can also be used as a verb meaning to put items into a catalog.</p>
-<p>A category is a group or set of things or people that have one or more common characteristics.</p>
-<p>A catalog may contain one or more categories. A catalog can also be in a category - “a tool catalog” or “a fashion catalog”.</p>
+              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>经过两天的知识总结与代码梳理，终于完成了知识蒸馏相关内容的PyTorch实现。主要难度点在于，由于需要进行大量的验证，因此必须要实现模型验证的自动化。关于知识蒸馏的代码部分并不多。</p>
+<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>本篇使用的损失函数分别是出自Hinton的<a href="https://arxiv.org/pdf/1503.02531.pdf" target="_blank" rel="noopener">Distilling the Knowledge in a Neural Network</a>和<a href="https://arxiv.org/pdf/1412.6550.pdf" target="_blank" rel="noopener">FITNETS: HINTS FORTHINDEEPNETS</a></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p><a href="https://github.com/zhaoyiming/knowledge-distillation" target="_blank" rel="noopener">https://github.com/zhaoyiming/knowledge-distillation</a></p>
 
             </div>
             <hr>
@@ -248,10 +247,19 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/英语学习/">英语学习</a>
+                      <a class="hover-with-bg" href="/categories/NeuralNetwork/">NeuralNetwork</a>
                     
                   </div>
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/NeuralNetwork/">NeuralNetwork</a>
+                    
+                      <a class="hover-with-bg" href="/tags/模型压缩/">模型压缩</a>
+                    
+                  </div>
                 
               </div>
               
@@ -262,18 +270,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2018/02/13/安卓开发中遇到的问题/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">安卓开发中遇到的问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2018/02/05/为你的博客添加Fork me on Github/">
-                        <span class="hidden-mobile">为你的博客添加Fork me on Github</span>
+                      <a href="/2021/03/06/2021-03-06-重温Pytorch解决Custom数据集问题/">
+                        <span class="hidden-mobile">重温PyTorch解决Custom dataset问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
