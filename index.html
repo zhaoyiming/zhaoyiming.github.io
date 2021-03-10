@@ -331,7 +331,7 @@ PyTorch数据读取PyTorch的数据加载模块，一共涉及到Dataset，Sampl
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/13/2021-02-13-在树莓派上运行yolo-v4/">在树莓派上运行yolo v4</a>
+        <a href="/2021/02/13/2021-02-13-在树莓派上运行yolo-v4/">在树莓派上运行YOLO-v4</a>
       </h1>
 
       <p class="index-excerpt">
@@ -340,8 +340,10 @@ PyTorch数据读取PyTorch的数据加载模块，一共涉及到Dataset，Sampl
           
             
           
-          引言需要完成在树莓派上调用yolo v4的任务，共计耗时两周，3/4的时间在尝试如何在树莓派上运行基于PyTorch的yolo v4，最终使用基于OpenCV-Python调用yolo v4可行，推理时间4s左右。
-环境为最大化树莓派效能，我们为树莓派刷入了Ubuntu 20.04 Server的基于arm64的系统。由于特殊原因，我们也使用了Ubuntu官网提供的Ubuntu 18.04 Des
+          引言需要在树莓派上完成调用YOLO-v4并且尽量减少推理时间的任务。
+大部分时间在尝试如何在树莓派上运行基于PyTorch的YOLO-v4，最终使用基于OpenCV-Python调用YOLO-v4可行，推理时间4s左右。
+OpenCV有加速库，所以比基于darknet的YOLO-v4推理速度更快一些，而基于OpenCV编译的darknet并没有加速，需要再实验论证。
+环境&amp;准备为最大化树莓
         </a>
       </p>
 

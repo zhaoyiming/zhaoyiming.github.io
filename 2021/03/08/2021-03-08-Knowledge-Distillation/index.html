@@ -178,7 +178,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      116 字
+      255 字
     </span>
   
 
@@ -188,7 +188,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -230,7 +230,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月9日 上午
+                  本文最后更新于：2021年3月10日 下午
                 
               </p>
             
@@ -238,6 +238,100 @@
               <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>经过两天的知识总结与代码梳理，终于完成了知识蒸馏相关内容的PyTorch实现。主要难度点在于，由于需要进行大量的验证，因此必须要实现模型验证的自动化。关于知识蒸馏的代码部分并不多。</p>
 <h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>本篇使用的损失函数分别是出自Hinton的<a href="https://arxiv.org/pdf/1503.02531.pdf" target="_blank" rel="noopener">Distilling the Knowledge in a Neural Network</a>和<a href="https://arxiv.org/pdf/1412.6550.pdf" target="_blank" rel="noopener">FITNETS: HINTS FORTHINDEEPNETS</a></p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p><a href="https://github.com/zhaoyiming/knowledge-distillation" target="_blank" rel="noopener">https://github.com/zhaoyiming/knowledge-distillation</a></p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><table>
+<thead>
+<tr>
+<th>实验时间</th>
+<th>student</th>
+<th>student acc</th>
+<th>teacher</th>
+<th>teacher acc</th>
+<th>kd acc</th>
+<th>loss function</th>
+<th>epoch</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021.3.8.11</td>
+<td>cnn</td>
+<td>0.7511</td>
+<td>densenet</td>
+<td>0.8194</td>
+<td>0.7511</td>
+<td>fitnet</td>
+<td>30</td>
+<td>init version</td>
+</tr>
+<tr>
+<td>2021.3.8.13</td>
+<td>cnn</td>
+<td>0.8412</td>
+<td>densenet</td>
+<td>0.9273</td>
+<td>0.8600</td>
+<td>fitnet</td>
+<td>30</td>
+<td>common version, overfit densenet</td>
+</tr>
+<tr>
+<td>2021.3.9.09</td>
+<td>cnn</td>
+<td>0.8412</td>
+<td>densenet</td>
+<td>0.9470</td>
+<td>0.8667</td>
+<td>fitnet</td>
+<td>30</td>
+<td>common densenet</td>
+</tr>
+<tr>
+<td>2021.3.9.10</td>
+<td>cnn</td>
+<td>0.8412</td>
+<td>densenet</td>
+<td>0.9470</td>
+<td>0.8831</td>
+<td>softmaxT</td>
+<td>100</td>
+<td>softmaxT loss function</td>
+</tr>
+<tr>
+<td>2021.3.9.15</td>
+<td>cnn</td>
+<td>0.8412</td>
+<td>densenet</td>
+<td>0.9470</td>
+<td>0.8805</td>
+<td>fitnet</td>
+<td>100</td>
+<td>enlarge epoch number</td>
+</tr>
+<tr>
+<td>2021.3.9.17</td>
+<td>cnn</td>
+<td>0.8650</td>
+<td>densenet</td>
+<td>0.9470</td>
+<td>0.8841</td>
+<td>fitnet</td>
+<td>100</td>
+<td>improve cnn acc</td>
+</tr>
+<tr>
+<td>2021.3.9.18</td>
+<td>cnn</td>
+<td>0.8650</td>
+<td>densenet</td>
+<td>0.9470</td>
+<td>0.8754</td>
+<td>fitnet</td>
+<td>100</td>
+<td>change T from 20 to 4</td>
+</tr>
+</tbody>
+</table>
 
             </div>
             <hr>
