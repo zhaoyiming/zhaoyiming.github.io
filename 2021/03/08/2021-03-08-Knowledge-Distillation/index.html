@@ -178,7 +178,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      255 字
+      807 字
     </span>
   
 
@@ -188,7 +188,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      11
        分钟
     </span>
   
@@ -230,78 +230,97 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月10日 下午
+                  本文最后更新于：2021年3月12日 中午
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>经过两天的知识总结与代码梳理，终于完成了知识蒸馏相关内容的PyTorch实现。主要难度点在于，由于需要进行大量的验证，因此必须要实现模型验证的自动化。关于知识蒸馏的代码部分并不多。</p>
-<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>本篇使用的损失函数分别是出自Hinton的<a href="https://arxiv.org/pdf/1503.02531.pdf" target="_blank" rel="noopener">Distilling the Knowledge in a Neural Network</a>和<a href="https://arxiv.org/pdf/1412.6550.pdf" target="_blank" rel="noopener">FITNETS: HINTS FORTHINDEEPNETS</a></p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p><a href="https://github.com/zhaoyiming/knowledge-distillation" target="_blank" rel="noopener">https://github.com/zhaoyiming/knowledge-distillation</a></p>
+              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>经过两天的知识总结与代码梳理，终于完成了知识蒸馏相关内容的PyTorch实现。主要难度点在于：由于需要进行大量的精度验证，因此必须要实现模型精度验证的自动化，根据Hinton的论文，知识蒸馏相关的代码部分并不多。</p>
+<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><p>数据统一使用CIFAR10，后续可以进行CIFAR100数据集的实验。</p>
+<p>使用torchvision自带的dataset类进行调用，然后进行数据增强、归一化和向量化。</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>我们的学生网络最开始使用传统的LeNet-5 CNN网络，在训练CIFAR10的过程中，我发现精度只有不到80%，分析其网络深度不够，不足以拟合CIFAR10数据集。于是加深网络到32、64、128个卷积核，最终可以实现86%的精度。</p>
+<p>我们教师网络采用比较熟悉的DenseNet，版本为growth=12和Depth=100的DenseNet-BC。最终训练精度为94.7%，距离论文提到的95.5%仍有一定差距。</p>
+<h3 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h3><p>关于模型蒸馏实验的方法主要分为以下几个步骤：</p>
+<ol>
+<li>首先训练基本的CNN作为BaseLine。</li>
+<li>然后训练300个epoch的DenseNet作为Teacher model。</li>
+<li>最后使用训练好的DenseNet模型来进行推理得到一个样本后，将t-model和s-model的softmaxT结果进行KL散度拟合，加上s-model和True Label的交叉熵，形成此次推理的Loss Function。</li>
+</ol>
+<h3 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h3><p>本篇使用的损失函数分别是出自Hinton的<a href="https://arxiv.org/pdf/1503.02531.pdf" target="_blank" rel="noopener">Distilling the Knowledge in a Neural Network</a>和<a href="https://arxiv.org/pdf/1412.6550.pdf" target="_blank" rel="noopener">FITNETS: HINTS FORTHINDEEPNETS</a>。</p>
+<p>具体实现代码为：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs undefined">def loss_fn_kd(outputs, labels, teacher_outputs, params):<br>    alpha = params.alpha<br>    <span class="hljs-literal">T</span> = params.temperature<br>    KD_loss = nn.KLDivLoss()(F.log_softmax(outputs/<span class="hljs-literal">T</span>, dim=<span class="hljs-number">1</span>),<br>                             F.softmax(teacher_outputs/<span class="hljs-literal">T</span>, dim=<span class="hljs-number">1</span>)) * (alpha * <span class="hljs-literal">T</span> * <span class="hljs-literal">T</span>) + \<br>              F.cross_entropy(outputs, labels) * (<span class="hljs-number">1.</span> - alpha)<br><br>    <span class="hljs-keyword">return</span> KD_loss<br></code></pre></td></tr></table></figure>
+<p>由于PyTorch内置的交叉熵函数只提供(output, target)输入，其中target并不是one-shot编码，KD loss需要softmax/T，故代码作者使用KL散度来代替Loss实现，由于<code>相对熵KL=熵+交叉熵</code>，而熵又是常量，所以结果理论上应该一致。但是实际上还有另外一种基础实现：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs undefined">def loss_fn_kd_sp(outputs, labels, teacher_outputs, params):<br>    <span class="hljs-attr">alpha</span> = params.alpha<br>    <span class="hljs-attr">T</span> = params.temperature<br>    <span class="hljs-attr">soft_target</span> = F.softmax(teacher_outputs / T, <span class="hljs-attr">dim=1)</span><br>    <span class="hljs-attr">soft</span> = F.log_softmax(outputs / T, <span class="hljs-attr">dim=1)</span><br><br>    <span class="hljs-attr">soft_loss</span> = -torch.mean(torch.sum(soft_target * soft, <span class="hljs-attr">dim=1))</span><br>    <span class="hljs-attr">hard_loss</span> = F.cross_entropy(outputs, labels)<br><br>    <span class="hljs-attr">loss</span> = soft_loss * T * T * alpha + hard_loss * (<span class="hljs-number">1</span>. - alpha)<br><br>    return loss<br></code></pre></td></tr></table></figure>
+<p>注意精度实现有一定差异，待考察。</p>
+<h3 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h3><ul>
+<li>需要关注一下Relational Network Knowledge Distillation。</li>
+<li>根据在知乎看到的一些内容，相同的网络结构可以取得更好的效果，后续将进行尝试。</li>
+</ul>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p><a href="https://github.com/zhaoyiming/knowledge-distillation" target="_blank" rel="noopener">https://github.com/zhaoyiming/knowledge-distillation</a></p>
 <h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><table>
 <thead>
 <tr>
-<th>实验时间</th>
-<th>student</th>
+<th>TimeLine</th>
+<th>student net</th>
 <th>student acc</th>
-<th>teacher</th>
+<th>teacher net</th>
 <th>teacher acc</th>
 <th>kd acc</th>
 <th>loss function</th>
 <th>epoch</th>
-<th>注释</th>
+<th>Comments</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>2021.3.8.11</td>
-<td>cnn</td>
+<td>CNN</td>
 <td>0.7511</td>
-<td>densenet</td>
+<td>DenseNet</td>
 <td>0.8194</td>
 <td>0.7511</td>
 <td>fitnet</td>
 <td>30</td>
-<td>init version</td>
+<td>Inital version</td>
 </tr>
 <tr>
 <td>2021.3.8.13</td>
-<td>cnn</td>
+<td>CNN</td>
 <td>0.8412</td>
-<td>densenet</td>
+<td>DenseNet</td>
 <td>0.9273</td>
 <td>0.8600</td>
 <td>fitnet</td>
 <td>30</td>
-<td>common version, overfit densenet</td>
+<td>common version, overfit DenseNet</td>
 </tr>
 <tr>
 <td>2021.3.9.09</td>
-<td>cnn</td>
+<td>CNN</td>
 <td>0.8412</td>
-<td>densenet</td>
+<td>DenseNet</td>
 <td>0.9470</td>
 <td>0.8667</td>
 <td>fitnet</td>
 <td>30</td>
-<td>common densenet</td>
+<td>common DenseNet</td>
 </tr>
 <tr>
-<td>2021.3.9.10</td>
-<td>cnn</td>
-<td>0.8412</td>
-<td>densenet</td>
-<td>0.9470</td>
-<td>0.8831</td>
-<td>softmaxT</td>
-<td>100</td>
-<td>softmaxT loss function</td>
+<td><strong>2021.3.9.10</strong></td>
+<td><strong>CNN</strong></td>
+<td><strong>0.8412</strong></td>
+<td><strong>DenseNet</strong></td>
+<td><strong>0.9470</strong></td>
+<td><strong>0.8831</strong></td>
+<td><strong>softmaxT</strong></td>
+<td><strong>100</strong></td>
+<td><strong>softmaxT loss function</strong></td>
 </tr>
 <tr>
 <td>2021.3.9.15</td>
-<td>cnn</td>
+<td>CNN</td>
 <td>0.8412</td>
-<td>densenet</td>
+<td>DenseNet</td>
 <td>0.9470</td>
 <td>0.8805</td>
 <td>fitnet</td>
@@ -309,26 +328,48 @@
 <td>enlarge epoch number</td>
 </tr>
 <tr>
-<td>2021.3.9.17</td>
-<td>cnn</td>
-<td>0.8650</td>
-<td>densenet</td>
-<td>0.9470</td>
-<td>0.8841</td>
-<td>fitnet</td>
-<td>100</td>
-<td>improve cnn acc</td>
+<td><strong>2021.3.9.17</strong></td>
+<td><strong>CNN</strong></td>
+<td><strong>0.8650</strong></td>
+<td><strong>DenseNet</strong></td>
+<td><strong>0.9470</strong></td>
+<td><strong>0.8841</strong></td>
+<td><strong>fitnet</strong></td>
+<td><strong>100</strong></td>
+<td><strong>improve CNN acc</strong></td>
 </tr>
 <tr>
 <td>2021.3.9.18</td>
-<td>cnn</td>
+<td>CNN</td>
 <td>0.8650</td>
-<td>densenet</td>
+<td>DenseNet</td>
 <td>0.9470</td>
 <td>0.8754</td>
 <td>fitnet</td>
 <td>100</td>
 <td>change T from 20 to 4</td>
+</tr>
+<tr>
+<td>2021.3.12.10</td>
+<td>CNN</td>
+<td>0.8650</td>
+<td>DenseNet</td>
+<td>0.9470</td>
+<td>0.8854</td>
+<td>fitnet</td>
+<td>100</td>
+<td>sp loss implement</td>
+</tr>
+<tr>
+<td>2021.3.12.12</td>
+<td>CNN</td>
+<td>0.8650</td>
+<td>DenseNet</td>
+<td>0.9470</td>
+<td>0.8772</td>
+<td>softmaxT</td>
+<td>100</td>
+<td>sp loss implement</td>
 </tr>
 </tbody>
 </table>

@@ -184,8 +184,9 @@
           
             
           
-          Introduction经过两天的知识总结与代码梳理，终于完成了知识蒸馏相关内容的PyTorch实现。主要难度点在于，由于需要进行大量的验证，因此必须要实现模型验证的自动化。关于知识蒸馏的代码部分并不多。
-Implement损失函数本篇使用的损失函数分别是出自Hinton的Distilling the Knowledge in a Neural Network和FITNETS: HINTS FOR
+          Introduction经过两天的知识总结与代码梳理，终于完成了知识蒸馏相关内容的PyTorch实现。主要难度点在于：由于需要进行大量的精度验证，因此必须要实现模型精度验证的自动化，根据Hinton的论文，知识蒸馏相关的代码部分并不多。
+ImplementDataset数据统一使用CIFAR10，后续可以进行CIFAR100数据集的实验。
+使用torchvision自带的dataset类进行调用，
         </a>
       </p>
 
