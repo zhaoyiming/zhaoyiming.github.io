@@ -51,7 +51,24 @@ def loss_fn_kd(outputs, labels, teacher_outputs, params):
     return KD_loss
 ```
 
+由于PyTorch内置的交叉熵函数只提供(output, target)输入，其中target并不是one-shot编码，KD loss需要softmax/T，故代码作者使用KL散度来代替Loss实现，由于`相对熵KL=熵+交叉熵`，而熵又是常量，所以结果理论上应该一致。但是实际上还有另外一种基础实现：
 
+```
+def loss_fn_kd_sp(outputs, labels, teacher_outputs, params):
+    alpha = params.alpha
+    T = params.temperature
+    soft_target = F.softmax(teacher_outputs / T, dim=1)
+    soft = F.log_softmax(outputs / T, dim=1)
+
+    soft_loss = -torch.mean(torch.sum(soft_target * soft, dim=1))
+    hard_loss = F.cross_entropy(outputs, labels)
+
+    loss = soft_loss * T * T * alpha + hard_loss * (1. - alpha)
+
+    return loss
+```
+
+注意精度实现有一定差异，待考察。
 
 ### Comments
 
@@ -64,12 +81,15 @@ def loss_fn_kd(outputs, labels, teacher_outputs, params):
 
 ## Experiment
 
-| TimeLine    | student net | student acc | teacher net | teacher acc | kd acc | loss function | epoch | Comments                         |
-| ----------- | ----------- | ----------- | ----------- | ----------- | ------ | ------------- | ----- | -------------------------------- |
-| 2021.3.8.11 | CNN         | 0.7511      | DenseNet    | 0.8194      | 0.7511 | fitnet        | 30    | Inital version                   |
-| 2021.3.8.13 | CNN         | 0.8412      | DenseNet    | 0.9273      | 0.8600 | fitnet        | 30    | common version, overfit DenseNet |
-| 2021.3.9.09 | CNN         | 0.8412      | DenseNet    | 0.9470      | 0.8667 | fitnet        | 30    | common DenseNet                  |
-| 2021.3.9.10 | CNN         | 0.8412      | DenseNet    | 0.9470      | 0.8831 | softmaxT      | 100   | softmaxT loss function           |
-| 2021.3.9.15 | CNN         | 0.8412      | DenseNet    | 0.9470      | 0.8805 | fitnet        | 100   | enlarge epoch number             |
-| 2021.3.9.17 | CNN         | 0.8650      | DenseNet    | 0.9470      | 0.8841 | fitnet        | 100   | improve CNN acc                  |
-| 2021.3.9.18 | CNN         | 0.8650      | DenseNet    | 0.9470      | 0.8754 | fitnet        | 100   | change T from 20 to 4            |
+| TimeLine        | student net | student acc | teacher net  | teacher acc | kd acc     | loss function | epoch   | Comments                         |
+| --------------- | ----------- | ----------- | ------------ | ----------- | ---------- | ------------- | ------- | -------------------------------- |
+| 2021.3.8.11     | CNN         | 0.7511      | DenseNet     | 0.8194      | 0.7511     | fitnet        | 30      | Inital version                   |
+| 2021.3.8.13     | CNN         | 0.8412      | DenseNet     | 0.9273      | 0.8600     | fitnet        | 30      | common version, overfit DenseNet |
+| 2021.3.9.09     | CNN         | 0.8412      | DenseNet     | 0.9470      | 0.8667     | fitnet        | 30      | common DenseNet                  |
+| **2021.3.9.10** | **CNN**     | **0.8412**  | **DenseNet** | **0.9470**  | **0.8831** | **softmaxT**  | **100** | **softmaxT loss function**       |
+| 2021.3.9.15     | CNN         | 0.8412      | DenseNet     | 0.9470      | 0.8805     | fitnet        | 100     | enlarge epoch number             |
+| **2021.3.9.17** | **CNN**     | **0.8650**  | **DenseNet** | **0.9470**  | **0.8841** | **fitnet**    | **100** | **improve CNN acc**              |
+| 2021.3.9.18     | CNN         | 0.8650      | DenseNet     | 0.9470      | 0.8754     | fitnet        | 100     | change T from 20 to 4            |
+| 2021.3.12.10    | CNN         | 0.8650      | DenseNet     | 0.9470      | 0.8854     | fitnet        | 100     | sp loss implement                |
+| 2021.3.12.12    | CNN         | 0.8650      | DenseNet     | 0.9470      | 0.8772     | softmaxT      | 100     | sp loss implement                |
+
