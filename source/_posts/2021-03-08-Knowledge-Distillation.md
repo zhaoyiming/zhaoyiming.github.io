@@ -51,7 +51,7 @@ def loss_fn_kd(outputs, labels, teacher_outputs, params):
     return KD_loss
 ```
 
-由于PyTorch内置的交叉熵函数只提供(output, target)输入，其中target并不是one-shot编码，KD loss需要softmax/T，故代码作者使用KL散度来代替Loss实现，由于`相对熵KL=熵+交叉熵`，而熵又是常量，所以结果理论上应该一致。但是实际上还有另外一种基础实现：
+由于PyTorch内置的交叉熵函数只提供(output, target)输入，其中target并不是one-shot编码，KD loss需要softmax/T，故代码作者使用KL散度来代替Loss实现，由于`相对熵KL=-熵+交叉熵`，而熵又是常量，所以结果理论上应该一致。但是实际上还有另外一种基础实现：
 
 ```
 def loss_fn_kd_sp(outputs, labels, teacher_outputs, params):
