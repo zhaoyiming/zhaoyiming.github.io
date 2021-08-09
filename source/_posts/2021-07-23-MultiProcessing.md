@@ -8,11 +8,9 @@ categories:
 ---
 # MultiProcessing of DL in PyTorch  
 
-```
 This article helps to handle DL tasks(e.g., extract and save embedding) base on multiprocess and multi-GPU in PyTorch. 
 
 Thought：Difference to the ddp。
-```
 
 ### Include libs
 
@@ -59,18 +57,19 @@ def parallel_extract(self):
                 p.start()
                 print(f'process {rank} has started')
                 processes.append(p)
-
+    
             for p in processes:
                 p.join()
         print(f'total time is {(time.time() - t0) / 60}')
 
-        
+
+​        
     def _parallel_extract(self, save_to_dir, csv_file, gpu_id, rank):
     
     	# allocate gpu for every child_process
         self.device = torch.device(gpu_id)
         
-  		# load model
+    	# load model
         self.params["embedding_model"].to(self.device)
     
         # prep dataloader

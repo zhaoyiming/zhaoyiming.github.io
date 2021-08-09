@@ -1,3 +1,14 @@
+---
+title: 在Nvidia TX2(arm)上搭建YOLOv4环境
+date: 2021-04-30 15:13:20
+tags:
+- arm 环境部署
+categories: 
+- 嵌入式
+---
+
+
+
 # 在Nvidia TX2(arm)上搭建YOLOv4环境
 
 ## 总结
