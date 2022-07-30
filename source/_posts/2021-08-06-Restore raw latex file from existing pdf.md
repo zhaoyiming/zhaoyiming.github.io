@@ -6,8 +6,6 @@ tags:
 categories: 
 - Paper
 ---
-# Restore raw Tex file from existing pdf  
-
 Maybe you have lost the raw latex file due to some strange reasons. Unforturenatly, there is no some simple way to rapidly restore the raw Tex code from the compiled pdf(Portable Document Format) file. Don't be upset, Let's restore it as far as possible. 
 
 ## Text

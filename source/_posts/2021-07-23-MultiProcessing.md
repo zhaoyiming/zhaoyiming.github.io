@@ -6,8 +6,6 @@ tags:
 categories: 
 - NeuralNetwork
 ---
-# MultiProcessing of DL in PyTorch  
-
 This article helps to handle DL tasks(e.g., extract and save embedding) base on multiprocess and multi-GPU in PyTorch. 
 
 Thought：Difference to the ddp。
