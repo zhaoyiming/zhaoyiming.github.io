@@ -1,0 +1,666 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Ming">
+  <meta name="keywords" content>
+  <title>腾讯犀牛鸟面试小记 - Momo</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css">
+    
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"zhaoyiming.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"324ede2741917bb85c85b33719994175","google":"G-WJ3653XPP1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="腾讯犀牛鸟面试小记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-05 14:13" pubdate>
+        2021年3月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">腾讯犀牛鸟面试小记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年7月29日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="面试准备"><a href="#面试准备" class="headerlink" title="面试准备"></a>面试准备</h1><h3 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h3><p>我叫赵一鸣，是来自南京航空航天大学的研一的学生，平时比较热爱互联网技术，本科主要学习的软件开发，擅长安卓开发。掌握C、Java以及Python语言，可以自己搭建服务器以及网站前后端，对部署嵌入式设备深度学习环境比较熟练。</p>
+<h3 id="研究方向及亮点介绍"><a href="#研究方向及亮点介绍" class="headerlink" title="研究方向及亮点介绍"></a>研究方向及亮点介绍</h3><p>我目前在做的研究方向主要集中在移动设备多模态的智能感知技术，具体到在做的东西主要是基于超声波的手势识别，毕业论文基于元学习的超声波手势识别系统，研一上学期主要在进行嵌入式设备的神经网络开发，目前正在准备结合声波物理模型和深度学习模型对移动端声波手势识别进行模型压缩，主要是teacher-student网络。</p>
+<p>我比较擅长嵌入式设备的工程实践，可以熟练地使用树莓派和Nvidia的Tx2开发板交叉编译神经网络库以及配置深度学习环境。可以在实践中来对嵌入式设备模式识别进行创新改进。</p>
+<h3 id="个人研究方向与申报课题的相关性"><a href="#个人研究方向与申报课题的相关性" class="headerlink" title="个人研究方向与申报课题的相关性"></a>个人研究方向与申报课题的相关性</h3><p>我个人研究方向主要集中在移动设备的智能感知领域，已经做的工作主要是关于(智能手机、VR/AR之类的)商业移动设备的超声波手势识别，由于使用神经网络要求算力高，数据量大，声波手势识别会耗费大量的计算资源，要想在实际移动设备部署中获得优秀的效能，一定绕不开模型压缩。 所以我想结合本领域内容和模型压缩来继续我的研究工作，在无线网络顶刊中知识蒸馏方法经常出现。</p>
+<h3 id="你的深度学习研究项目"><a href="#你的深度学习研究项目" class="headerlink" title="你的深度学习研究项目"></a>你的深度学习研究项目</h3><p>我参与过的深度学习项目主要是基于元学习的超声波手势识别系统和一个战场识别系统。</p>
+<ul>
+<li>超声波识别系统是我的本科毕业论文，主要是借助商业手机扬声器发出超声波，麦克风接受超声波信号，然后通过一个特别设计的孪生网络对测试样本和支持集样本提取特征，最后通过一个特别的深度关系网络评估相似度得到测试样本标签，训练方法使用一种基于metric learning元学习的特定方法，通过将训练集划分为测试样本和支持样本直接模拟推理过程增加泛化性能。</li>
+<li>战场识别系统主要使用yolov4结合多模态来进行一些战场物体的识别，我主要负责的是模型的推理以及在一台arm架构的设备上进行模型部署，由于使用的嵌入式设备只支持C++动态库，所以我负责处理推理代码的C++实现，编译一些必要的神经网络库，编译代码实现，构建前后端系统。</li>
+<li>简单介绍元学习：元学习，也可以叫做学习去学习，区别于深度学习这种通过训练数据学习输入到输出之间的映射关系，优化损失函数来进行优化参数，元学习通过大量训练和目标任务相似的任务来训练一个元学习器，从而实现只需要极少样本就可以实现模型训练。</li>
+</ul>
+<h1 id="其他准备"><a href="#其他准备" class="headerlink" title="其他准备"></a>其他准备</h1><h3 id="深度学习的特点"><a href="#深度学习的特点" class="headerlink" title="深度学习的特点"></a>深度学习的特点</h3><ul>
+<li>局部连接</li>
+<li>权值共享</li>
+<li>池化操作</li>
+<li>多层次结构</li>
+</ul>
+<h3 id="深度学习中的超参数"><a href="#深度学习中的超参数" class="headerlink" title="深度学习中的超参数"></a>深度学习中的超参数</h3><ul>
+<li>正则化参数<ul>
+<li>L1 L2</li>
+</ul>
+</li>
+<li>网络结构<ul>
+<li>各层size</li>
+</ul>
+</li>
+<li>优化参数<ul>
+<li>LR</li>
+<li>Batch Size</li>
+<li>Dropout</li>
+<li>优化器</li>
+</ul>
+</li>
+</ul>
+<h3 id="模型压缩"><a href="#模型压缩" class="headerlink" title="模型压缩"></a>模型压缩</h3><ul>
+<li><p>剪枝</p>
+<p>NAS</p>
+</li>
+<li><p>量化</p>
+<p>int8 int4 二值</p>
+</li>
+<li><p>知识蒸馏 </p>
+<p>TS网络</p>
+</li>
+<li><p>轻量化模型</p>
+</li>
+</ul>
+<h3 id="一些深度学习面试问题"><a href="#一些深度学习面试问题" class="headerlink" title="一些深度学习面试问题"></a>一些深度学习面试问题</h3><ul>
+<li><p>线性回归和逻辑回归区别联系</p>
+<ul>
+<li>都为线性模型</li>
+<li>线性回归解决回归任务，逻辑回归解决分类任务</li>
+<li>线性回归进行线性预测，逻辑回归在线性回归的基础上增加sigmoid函数对预测结果进行分类</li>
+</ul>
+</li>
+<li><p>性能评估</p>
+<ul>
+<li>查准率</li>
+<li>查全率</li>
+</ul>
+</li>
+<li><p>dropout作用</p>
+<p>在网络训练时，在全连接层随机丢弃一些神经元，使隐层神经元不会太依赖局部特征，防止过拟合。</p>
+</li>
+<li><p>不同损失函数特点差异</p>
+<ul>
+<li>cross-entropy</li>
+<li>MSE</li>
+</ul>
+</li>
+<li><p>权重初始化方法特点</p>
+<ul>
+<li>Goss</li>
+<li>Uniform</li>
+<li>Xavier</li>
+<li>kaiming</li>
+</ul>
+</li>
+<li><p>Bagging and boosting</p>
+<ul>
+<li><p>bagging </p>
+<p>从原始数据随机挑选数据训练k个分类器，然后对预测值投票决定。</p>
+</li>
+</ul>
+</li>
+<li><p>K折交叉验证</p>
+<p>将所有训练数据分为k份，将k-1份作为训练数据，余下1份作为测试数据，直到所有数据都被测试后，将结果加权平均</p>
+</li>
+<li><p>梯度爆炸和梯度消失</p>
+<ul>
+<li>从网络阶段来说，网络层数太多，而卷积神经网络的反向梯度更新过程又需要大量的(损失函数对第一层权重求导需要从最后一层开始链式原则相乘)乘积计算，出现过小的值会导致梯度消失，出现过大的值则会导致梯度爆炸。</li>
+<li>从激活函数来说，sigmoid函数的特性导致(或者说sigmoid函数将函数的映射挤压在一个小范围内)，数据在极大或极小的情况下，梯度的变化率很小，导致梯度消失。使用relu函数即可解决问题。</li>
+</ul>
+</li>
+<li><p>loss不变化原因以及解决方案</p>
+<p>可能是梯度消失，建议改变权重初始化或者改变激活函数。</p>
+</li>
+<li><p>为什么使用尺寸更小的卷积核</p>
+<p>在相同激活野的情况下拥有更少的参数，防止过拟合，减少网络结构。</p>
+</li>
+</ul>
+<h1 id="面试总结"><a href="#面试总结" class="headerlink" title="面试总结"></a>面试总结</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs undefined">完全没有问到模型压缩和深度学习的知识。<br>问的问题主要集中在：<br></code></pre></td></tr></table></figure>
+<h3 id="元学习"><a href="#元学习" class="headerlink" title="元学习"></a>元学习</h3><ul>
+<li><p>元学习训练过程</p>
+</li>
+<li><p>元学习原理</p>
+</li>
+<li><p>具体PyTorch实现的一些代码</p>
+</li>
+</ul>
+<h3 id="信号处理"><a href="#信号处理" class="headerlink" title="信号处理"></a>信号处理</h3><ul>
+<li><p>手机发射收集信号的过程原理</p>
+</li>
+<li><p>I、Q为什么能提取特征？</p>
+</li>
+</ul>
+<h3 id="安卓"><a href="#安卓" class="headerlink" title="安卓"></a>安卓</h3><ul>
+<li><p>子线程更新主线程UI的方法</p>
+</li>
+<li><p>网络编程是否擅长</p>
+</li>
+<li><p>对相机编程有没有了解</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/工作实习/">工作实习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/面试/">面试</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/06/2021-03-06-重温Pytorch解决Custom数据集问题/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">重温PyTorch解决Custom dataset问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/13/2021-02-13-在树莓派上运行yolo-v4/">
+                        <span class="hidden-mobile">在树莓派上运行YOLO-v4</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ycjMj6EdRDYF7byqspSKiz75-gzGzoHsz",
+          app_key: "u76RMHuwbivGFqibuHx9UXpf",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://valine.js.org" rel="nofollow noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?324ede2741917bb85c85b33719994175";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-WJ3653XPP1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
