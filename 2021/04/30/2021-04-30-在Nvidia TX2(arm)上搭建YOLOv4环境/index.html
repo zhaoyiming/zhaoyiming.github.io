@@ -5,45 +5,50 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
   <link rel="icon" type="image/png" href="/img/avatar.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content>
+  <meta name="description" content="">
   <meta name="author" content="Ming">
-  <meta name="keywords" content>
+  <meta name="keywords" content="">
   <title>在Nvidia TX2(arm)上搭建YOLOv4环境 - Momo</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css">
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
     
   
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
@@ -52,9 +57,9 @@
     var Fluid = window.Fluid || {};
     var CONFIG = {"hostname":"zhaoyiming.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"324ede2741917bb85c85b33719994175","google":"G-WJ3653XPP1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
-</head>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 7.0.0-rc1"></head>
 
 <body>
   <header style="height: 70vh;">
@@ -255,8 +260,8 @@
 </ul>
 <h2 id="安装Pytorch以及Torchvision"><a href="#安装Pytorch以及Torchvision" class="headerlink" title="安装Pytorch以及Torchvision"></a>安装Pytorch以及Torchvision</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>最好是用Miniforge或者其他Conda环境来构建虚拟环境。</p>
 <h3 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h3><p>踩过许多坑，最终发现以下配合最为简洁。</p>
-<p><a href="https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-8-0-now-available/72048" target="_blank" rel="noopener">Pytorch下载地址</a>,最好使用该地址下Nvidia官方编译好的带cuda的Pytorch，否则不能开启cuda加速。</p>
-<p><a href="https://github.com/KumaTea/pytorch-aarch64/releases" target="_blank" rel="noopener">Torchvision下载地址</a>前者Nvidia官方只提供了本地编译torchvision，我实测编译失败且慢，不使用。(想要编译0.9.0版本的除外，见注意事项3)</p>
+<p><a href="https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-8-0-now-available/72048">Pytorch下载地址</a>,最好使用该地址下Nvidia官方编译好的带cuda的Pytorch，否则不能开启cuda加速。</p>
+<p><a href="https://github.com/KumaTea/pytorch-aarch64/releases">Torchvision下载地址</a>前者Nvidia官方只提供了本地编译torchvision，我实测编译失败且慢，不使用。(想要编译0.9.0版本的除外，见注意事项3)</p>
 <h2 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
 <li>需要注意的Jetpack自带的cuda10.2的话，可以使用的pytorch版本为1.6.0及以上</li>
 <li>如果遇到mish-cuda找不到，请<code>pip install git+https://github.com/thomasbrandon/mish-cuda/</code></li>
@@ -272,7 +277,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/嵌入式/">嵌入式</a>
+                      <a class="hover-with-bg" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
                     
                   </div>
                 
@@ -280,7 +285,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/arm-环境部署/">arm 环境部署</a>
+                      <a class="hover-with-bg" href="/tags/arm-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">arm 环境部署</a>
                     
                   </div>
                 

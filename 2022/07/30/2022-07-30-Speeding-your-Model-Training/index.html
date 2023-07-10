@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Ming">
+  <meta name="keywords" content="">
+  <title>Speeding Your Model Training - Momo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"zhaoyiming.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"324ede2741917bb85c85b33719994175","google":"G-WJ3653XPP1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 7.0.0-rc1"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Speeding Your Model Training">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-30 00:41" pubdate>
+        2022年7月30日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Speeding Your Model Training</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年7月30日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Time is very precious for deep learning engineers. A typical time cost for model training could be divided into three parts:</p>
+<ul>
+<li><strong>Data Loading</strong></li>
+<li><strong>Forward Propagation</strong></li>
+<li><strong>Backward Propagation</strong></li>
+</ul>
+<p>It is essential to reduce the time cost of data reading when GPU resource is enough and fixed. The data loading time could be reduced to less than 0.001s for a batch(8 samples), and the latter two procedures could cost 0.16s and 0.23s. However, any extra operation for training data(i.e., chunk data) would directly bring more time costs for every batch. To reduce the whole training time cost, you cloud to improve the training process from the following two aspects. </p>
+<h2 id="Save-Data-to-HDF5"><a href="#Save-Data-to-HDF5" class="headerlink" title="Save Data to HDF5"></a>Save Data to HDF5</h2><p>To alleviate the real-time communication expense between memory and disks, saving your fragment files to a whole file is better to reduce the retrieval overhead. HDF5 is an ideal saving file format for massive data. Following are some detailed procedures in saving data to an HDF5:</p>
+<h3 id="Speeding-data-saving-by-multiprocessing"><a href="#Speeding-data-saving-by-multiprocessing" class="headerlink" title="Speeding data saving by multiprocessing"></a>Speeding data saving by multiprocessing</h3><h4 id="Obtaining-data-list"><a href="#Obtaining-data-list" class="headerlink" title="Obtaining data list"></a>Obtaining data list</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_list</span>(<span class="hljs-params">from_path, target_path</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;generate train data lists from data path.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        from_path (string): data path</span><br><span class="hljs-string">        target_path (sring): list path</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    files=os.listdir(from_path)<br>    files_list=[]<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> files:<br>        files_list.append(i)<br>    <br>    train_list=files_list[:<span class="hljs-number">70000</span>]<br>    dev_list=files_list[<span class="hljs-number">70000</span>:<span class="hljs-number">71000</span>]<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(target_path+<span class="hljs-string">&quot;train_temp.scp&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> f:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> train_list:<br>            f.write(i+<span class="hljs-string">&quot; &quot;</span>+from_path+<span class="hljs-string">&quot;/&quot;</span>+i+<span class="hljs-string">&quot;\n&quot;</span>)<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(target_path+<span class="hljs-string">&quot;dev_temp.scp&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> f:<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> dev_list:<br>            f.write(i+<span class="hljs-string">&quot; &quot;</span>+from_path+<span class="hljs-string">&quot;/&quot;</span>+i+<span class="hljs-string">&quot;\n&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----generate_list down-----&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="Splitting-the-training-data-list-to-several-lists"><a href="#Splitting-the-training-data-list-to-several-lists" class="headerlink" title="Splitting the training data list to several lists"></a>Splitting the training data list to several lists</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_scp</span>(<span class="hljs-params">from_path, target_path, file_num</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Splitting big trainging list to multiple file to parallel extract features </span><br><span class="hljs-string"></span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        from_path (string): to be splited file path</span><br><span class="hljs-string">        target_path (string): chunk files path</span><br><span class="hljs-string">        file_num (int): number to be splited</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    f = <span class="hljs-built_in">open</span>(from_path, <span class="hljs-string">&quot;r&quot;</span>)<br>    lines = f.readlines()  <br>    n = math.ceil(<span class="hljs-built_in">len</span>(lines)/file_num)<br>    output = [lines[i:i + n] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(lines), n)]<br><br>    <span class="hljs-keyword">for</span> small <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(output)):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;train&quot;</span>+<span class="hljs-built_in">str</span>(small)+<span class="hljs-string">&quot;.scp: &quot;</span>,<span class="hljs-built_in">len</span>(output[small]))<br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(target_path + <span class="hljs-string">&quot;train&quot;</span>+<span class="hljs-built_in">str</span>(small)+<span class="hljs-string">&quot;.scp&quot;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> output[small]:<br>                f.write(i)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----split_scp down-----&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="Saving-your-data-to-HDF5"><a href="#Saving-your-data-to-HDF5" class="headerlink" title="Saving your data to HDF5"></a>Saving your data to HDF5</h4><p>Read data from your data list in the following code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">data_load</span>():<br>       data_dict=&#123;i:[] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;key1&quot;</span>, <span class="hljs-string">&quot;key2&quot;</span>]&#125;<br>       <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> datalist:<br>           eg=data_read(data) <span class="hljs-comment"># for read data</span><br>           chunks = self.splitter.split(eg) <span class="hljs-comment"># for chunk </span><br>           <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> chunks:<br>               <span class="hljs-keyword">for</span> cell <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;key1&quot;</span>, <span class="hljs-string">&quot;key2&quot;</span>]:<br>               data_dict[cell].append(i[cell])<br><br>        batch = &#123;<br>                key: np.stack(data_dict[key], axis=<span class="hljs-number">0</span>).astype(np.float32)<br>                <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;key1&quot;</span>, <span class="hljs-string">&quot;key2&quot;</span>]<br>        &#125;<br>       <br>        <span class="hljs-keyword">with</span> h5py.File(to_file, <span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> fw:<br>            fw[<span class="hljs-string">&quot;key1&quot;</span>], fw[<span class="hljs-string">&quot;key2&quot;</span>] = batch[<span class="hljs-string">&quot;key1&quot;</span>], batch[<span class="hljs-string">&quot;key2&quot;</span>]<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;saving &#x27;</span> + <span class="hljs-built_in">str</span>(<span class="hljs-built_in">len</span>(data_dict[<span class="hljs-string">&quot;key1&quot;</span>])) + <span class="hljs-string">&#x27; data to &#x27;</span>+to_file)<br>        fw.close()<br></code></pre></td></tr></table></figure>
+
+<h4 id="Multiprocessing"><a href="#Multiprocessing" class="headerlink" title="Multiprocessing"></a>Multiprocessing</h4><p>Utilizing the multiprocessing method in python to extract data to multiple hdf5 files:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">process_ming</span>(<span class="hljs-params">scp, to_file, training</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Multiple proecess to parallel extract feature</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        scp (string): child process file</span><br><span class="hljs-string">        training (bool): is training</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    dataload(xxx, xxx)<br><br><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Process<br>process_num=<span class="hljs-number">10</span> <span class="hljs-comment"># processes you want to paralell run</span><br>processes = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(process_num):<br>  p = Process(target=process_ming,<br>              args=(xxx,xxx))<br>  p.start()<br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;process &#x27;</span>+ <span class="hljs-built_in">str</span>(i) +<span class="hljs-string">&#x27; has started&#x27;</span>)<br>  processes.append(p)<br><br><span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> processes:<br>    p.join()<br></code></pre></td></tr></table></figure>
+
+<h4 id="Merge-hdf5-files-to-one"><a href="#Merge-hdf5-files-to-one" class="headerlink" title="Merge hdf5 files to one"></a>Merge hdf5 files to one</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">h52binh5</span>(<span class="hljs-params">from_path, to_file</span>):<br>    <span class="hljs-string">&quot;&quot;&quot; Combining multiple small h5 files to a whole h5 file</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        path (string): path that store all small h5 files</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(os.path.dirname(to_file)):<br>        os.mkdir(os.path.dirname(to_file))<br><br>    <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> os.walk(from_path):<br>        <span class="hljs-keyword">with</span> h5py.File(os.path.join(root, files[<span class="hljs-number">0</span>]), <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f1:<br>            attributs = <span class="hljs-built_in">list</span>(f1.keys())<br>        f1.close()<br><br>        data = &#123;attribut: [] <span class="hljs-keyword">for</span> attribut <span class="hljs-keyword">in</span> attributs&#125;<br>        <span class="hljs-keyword">for</span> attribut <span class="hljs-keyword">in</span> attributs:<br>            <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(files):<br>                <span class="hljs-keyword">with</span> h5py.File(os.path.join(root, file), <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f2:<br>                    data[attribut].append(f2[attribut][...])<br>                f2.close()<br>            temp=np.concatenate(data[attribut], axis=<span class="hljs-number">0</span>)<br>            <span class="hljs-built_in">print</span>(attribut+<span class="hljs-string">&quot; : &quot;</span>+ <span class="hljs-built_in">str</span>(temp.shape[<span class="hljs-number">0</span>]))<br>            <span class="hljs-keyword">with</span> h5py.File(to_file, <span class="hljs-string">&quot;a&quot;</span>) <span class="hljs-keyword">as</span> fw:<br>                fw[attribut] = temp<br>            fw.close()<br>            <span class="hljs-keyword">del</span> temp<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----combining h5 files down-----&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="Customize-your-dataset-for-reading-HDF5"><a href="#Customize-your-dataset-for-reading-HDF5" class="headerlink" title="Customize your dataset for reading HDF5"></a>Customize your dataset for reading HDF5</h3><p>Customize your PyTorch dataset to extract data from HDF5:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">myDataset</span>(<span class="hljs-title class_ inherited__">Dataset</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, file</span>):<br>        self.fw=h5py.File(file, <span class="hljs-string">&#x27;r&#x27;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(self.fw[<span class="hljs-string">&quot;key1&quot;</span>])<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, idx</span>):<br>        <span class="hljs-keyword">return</span> torch.tensor(self.fw[<span class="hljs-string">&quot;key1&quot;</span>][idx], dtype=torch.float32), torch.tensor(self.fw[<span class="hljs-string">&quot;key2&quot;</span>][idx], dtype=torch.float32)<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="Ultizing-MultiPorcess-to-Improve-Costing-Operation"><a href="#Ultizing-MultiPorcess-to-Improve-Costing-Operation" class="headerlink" title="Ultizing MultiPorcess to Improve Costing Operation"></a>Ultizing MultiPorcess to Improve Costing Operation</h3><p>Avoid processing or chunking your data during the training procedure. Operation for training data would bring unmeaningful time cost, and this costing operation is challenging to parallel. Therefore, moving these operations to the data preparation stage could reduce training time. </p>
+<h2 id="DP-amp-DDP"><a href="#DP-amp-DDP" class="headerlink" title="DP &amp; DDP"></a>DP &amp; DDP</h2><h3 id="Data-Parallel"><a href="#Data-Parallel" class="headerlink" title="Data Parallel"></a>Data Parallel</h3><p>Speeding model training by DP as following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">model = torch.nn.DataParallel(model) <br></code></pre></td></tr></table></figure>
+
+<p>What’s more? Put some data operation to be speeded by Cuda on your first GPU.</p>
+<h3 id="Distributed-Data-Parallel"><a href="#Distributed-Data-Parallel" class="headerlink" title="Distributed Data Parallel"></a>Distributed Data Parallel</h3><p>Speeding model training by DDP as following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch.distributed <span class="hljs-keyword">as</span> dist<br><span class="hljs-keyword">from</span> torch.nn.parallel <span class="hljs-keyword">import</span> DistributedDataParallel <span class="hljs-keyword">as</span> DDP<br><span class="hljs-keyword">import</span> argparse<br><br>parser = argparse.ArgumentParser()<br>parser.add_argument(<span class="hljs-string">&quot;--local_rank&quot;</span>,default=-<span class="hljs-number">1</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>)<br>args = parser.parse_args()<br><br>torch.cuda.set_device(args.local_rank)<br>torch.distributed.init_process_group(backend=<span class="hljs-string">&#x27;nccl&#x27;</span>)<br>nnet=model()<br><br>train_dataset=myDataset(args.train_data)<br>dev_dataset=myDataset(args.dev_data)<br><br>train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, rank=args.local_rank, shuffle=<span class="hljs-literal">True</span>)<br>dev_sampler =torch.utils.data.distributed.DistributedSampler(dev_dataset, rank=args.local_rank, shuffle=<span class="hljs-literal">False</span>) <br><br>train_loader = DataLoader(<br>    dataset=train_dataset,<br>    sampler=train_sampler,<br>    batch_size=args.batch_size,<br>    num_workers=<span class="hljs-number">16</span>,<br>    pin_memory=<span class="hljs-literal">True</span>,<br>    drop_last=<span class="hljs-literal">False</span><br>)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Trainer</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,</span><br><span class="hljs-params">                 nnet,</span><br><span class="hljs-params">                 rank,</span><br><span class="hljs-params">                 </span>):<br>        self.rank=rank,<br>        self.device = th.device(<span class="hljs-string">&quot;cuda&quot;</span>, self.rank[<span class="hljs-number">0</span>])<br>        self.nnet=DDP(nnet.to(self.device), device_ids=[self.rank], output_device=self.rank)<br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">save_checkpoint</span>(<span class="hljs-params">self, best=<span class="hljs-literal">True</span></span>):<br>        cpt = &#123;<br>            <span class="hljs-string">&quot;epoch&quot;</span>: self.cur_epoch,<br>            <span class="hljs-string">&quot;model_state_dict&quot;</span>: self.nnet.module.state_dict(), <span class="hljs-comment"># add .module for ddp</span><br>            <span class="hljs-string">&quot;optim_state_dict&quot;</span>: self.optimizer.state_dict()<br>        &#125;<br>        th.save(<br>            cpt,<br>            os.path.join(self.checkpoint,<span class="hljs-string">&quot;&#123;0&#125;.pt.tar&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;best&quot;</span> <span class="hljs-keyword">if</span> best <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;last&quot;</span>)))<br><br><br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/NeuralNetwork/">NeuralNetwork</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/10/2023-07-10-Speeding-your-Model-Training_Extras/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Speeding Your Model Training Extras</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/26/2022-03-26-%E8%B6%85%E5%A3%B0%E6%B3%A2%E8%B0%83%E5%88%B6%E8%A7%A3%E8%B0%83%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7/">
+                        <span class="hidden-mobile">超声波调制解调信号</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ycjMj6EdRDYF7byqspSKiz75-gzGzoHsz",
+          app_key: "u76RMHuwbivGFqibuHx9UXpf",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://valine.js.org" rel="nofollow noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?324ede2741917bb85c85b33719994175";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-WJ3653XPP1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

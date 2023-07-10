@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Ming">
+  <meta name="keywords" content="">
+  <title>Momo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"zhaoyiming.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"324ede2741917bb85c85b33719994175","google":"G-WJ3653XPP1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 7.0.0-rc1"></head>
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="This is ming's individual blog">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/10/2023-07-10-Speeding-your-Model-Training_Extras/">Speeding Your Model Training Extras</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/07/10/2023-07-10-Speeding-your-Model-Training_Extras/">
+          
+          
+            
+          
+          INTRODUCTIONAlthough some methods of model training acceleration have been described, over the past year I have come across a few more techniques in model training that can improve training speed. In 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-10 20:45" pubdate>
+              2023-07-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/NeuralNetwork/">NeuralNetwork</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/30/2022-07-30-Speeding-your-Model-Training/">Speeding Your Model Training</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/30/2022-07-30-Speeding-your-Model-Training/">
+          
+          
+            
+          
+          Time is very precious for deep learning engineers. A typical time cost for model training could be divided into three parts:
+
+Data Loading
+Forward Propagation
+Backward Propagation
+
+It is essential to 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-30 00:41" pubdate>
+              2022-07-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/NeuralNetwork/">NeuralNetwork</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/26/2022-03-26-%E8%B6%85%E5%A3%B0%E6%B3%A2%E8%B0%83%E5%88%B6%E8%A7%A3%E8%B0%83%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7/">超声波调制解调信号</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/26/2022-03-26-%E8%B6%85%E5%A3%B0%E6%B3%A2%E8%B0%83%E5%88%B6%E8%A7%A3%E8%B0%83%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7/">
+          
+          
+            
+          
+          完成使用超声波调制发送解调IP地址的任务。
+主要流程1、 在电脑使用matlab，将提供的IP转换为32位二进制。将每一位0或1分别调制成480&#x2F;48000&#x3D;0.1s的正弦波，进行拼接。
+2、 使用安卓手机发射调制的正弦波，使用麦克风接收声波信号。
+3、 将麦克风收到的信号通过高通滤波器得到高频信号，根据信号的滑动均值和阈值提取收集到的整段信号，将根据信号窗口提取FFT能量作为
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-26 22:33" pubdate>
+              2022-03-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Dynamic-Network/">Dynamic Network</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/">模型压缩</a>
+            
+              <a href="/tags/Dynamic-Network/">Dynamic Network</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/21/2021-12-21-%E5%8A%A8%E6%80%81%E7%BD%91%E7%BB%9C%E7%A0%94%E7%A9%B6%E6%80%BB%E7%BB%93/">动态网络研究总结</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/21/2021-12-21-%E5%8A%A8%E6%80%81%E7%BD%91%E7%BB%9C%E7%A0%94%E7%A9%B6%E6%80%BB%E7%BB%93/">
+          
+          
+            
+          
+          模型压缩包括量化、网络剪枝、模型蒸馏和网络结构搜索(NAS)，对于轻量化设备部署神经网络比较有意义。网络剪枝包括动态剪枝和静态剪枝，目的为减少计算量以及模型容量。静态剪枝为主流，通过先确定最优网络然后进行物理修建网络以实现网络瘦身，缺点是对于新的样本效果可能不好。动态剪枝类似于NAS，实际效果有待评估。
+为什么要做动态网络
+传统网络只根据固定权重来推理每个样本，不同难度的样本(一张图像中，占画面很
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-21 20:13" pubdate>
+              2021-12-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Dynamic-Network/">Dynamic Network</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/">模型压缩</a>
+            
+              <a href="/tags/Dynamic-Network/">Dynamic Network</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/06/2021-08-06-Restore%20raw%20latex%20file%20from%20existing%20pdf/">Restore raw latex file from existing pdf</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/06/2021-08-06-Restore%20raw%20latex%20file%20from%20existing%20pdf/">
+          
+          
+            
+          
+          Maybe you have lost the raw latex file due to some strange reasons. Unforturenatly, there is no some simple way to rapidly restore the raw Tex code from the compiled pdf(Portable Document Format) file
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-06 19:13" pubdate>
+              2021-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Paper/">Paper</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Paper/">Paper</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/23/2021-07-23-MultiProcessing/">MultiProcessing of DL in PyTorch</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/23/2021-07-23-MultiProcessing/">
+          
+          
+            
+          
+          This article helps to handle DL tasks(e.g., extract and save embedding) base on multiprocess and multi-GPU in PyTorch. 
+Thought：Difference to the ddp。
+Include libs12import GPUtilfrom torch.multiproces
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-23 15:13" pubdate>
+              2021-07-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/NeuralNetwork/">NeuralNetwork</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/NeuralNetwork/">NeuralNetwork</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/30/2021-04-30-%E5%9C%A8Nvidia%20TX2(arm)%E4%B8%8A%E6%90%AD%E5%BB%BAYOLOv4%E7%8E%AF%E5%A2%83/">在Nvidia TX2(arm)上搭建YOLOv4环境</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/30/2021-04-30-%E5%9C%A8Nvidia%20TX2(arm)%E4%B8%8A%E6%90%AD%E5%BB%BAYOLOv4%E7%8E%AF%E5%A2%83/">
+          
+          
+            
+          
+          总结结合之前的经验，总共耗时两天。由于我的TX2系统为3.x版本，没有自带cuda，要安装非常麻烦，所以进行刷机。如果自带cuda请略过这一部。
+主要问题集中在Jetpack系统的刷入以及Pytorch cuda加速上。
+安装Jetpack正常流程按照网上的教程：
+
+注册Nvidia账号
+安装VMware虚拟机安装Ubuntu系统，开启桥接模式连接网络，安装sdkmanger。
+按照流程打开sdk
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-30 15:13" pubdate>
+              2021-04-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/arm-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">arm 环境部署</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/08/2021-03-08-Knowledge-Distillation/">Knowledge Distillation</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/08/2021-03-08-Knowledge-Distillation/">
+          
+          
+            
+          
+          Introduction经过两天的知识总结与代码梳理，终于完成了知识蒸馏相关内容的PyTorch实现。主要难度点在于：由于需要进行大量的精度验证，因此必须要实现模型精度验证的自动化，根据Hinton的论文，知识蒸馏相关的代码部分并不多。
+ImplementDataset数据统一使用CIFAR10，后续可以进行CIFAR100数据集的实验。
+使用torchvision自带的dataset类进行调用，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-08 14:13" pubdate>
+              2021-03-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/NeuralNetwork/">NeuralNetwork</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/NeuralNetwork/">NeuralNetwork</a>
+            
+              <a href="/tags/%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9/">模型压缩</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/06/2021-03-06-%E9%87%8D%E6%B8%A9Pytorch%E8%A7%A3%E5%86%B3Custom%E6%95%B0%E6%8D%AE%E9%9B%86%E9%97%AE%E9%A2%98/">重温PyTorch解决Custom dataset问题</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/06/2021-03-06-%E9%87%8D%E6%B8%A9Pytorch%E8%A7%A3%E5%86%B3Custom%E6%95%B0%E6%8D%AE%E9%9B%86%E9%97%AE%E9%A2%98/">
+          
+          
+            
+          
+          主要问题
+如何解决自定义数据集构造和读取
+如何将整个数据集分成训练数据和测试数据
+
+PyTorch数据读取PyTorch的数据加载模块，一共涉及到Dataset，Sampler，DataLoader三个类
+三者的关系：
+
+设置Dataset，将数据data source包装成Dataset类，暴露提取接口。
+设置Sampler，决定采样方式。我们是能从Dataset中提取元素了，还是需要设置Sam
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-06 15:13" pubdate>
+              2021-03-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/NeuralNetwork/">NeuralNetwork</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/NeuralNetwork/">NeuralNetwork</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/05/2021-03-05-%E8%85%BE%E8%AE%AF%E7%8A%80%E7%89%9B%E9%B8%9F%E9%9D%A2%E8%AF%95%E5%B0%8F%E8%AE%B0/">腾讯犀牛鸟面试小记</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/05/2021-03-05-%E8%85%BE%E8%AE%AF%E7%8A%80%E7%89%9B%E9%B8%9F%E9%9D%A2%E8%AF%95%E5%B0%8F%E8%AE%B0/">
+          
+          
+            
+          
+          面试准备自我介绍我叫赵一鸣，是来自南京航空航天大学的研一的学生，平时比较热爱互联网技术，本科主要学习的软件开发，擅长安卓开发。掌握C、Java以及Python语言，可以自己搭建服务器以及网站前后端，对部署嵌入式设备深度学习环境比较熟练。
+研究方向及亮点介绍我目前在做的研究方向主要集中在移动设备多模态的智能感知技术，具体到在做的东西主要是基于超声波的手势识别，毕业论文基于元学习的超声波手势识别系统，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-05 14:13" pubdate>
+              2021-03-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E4%BD%9C%E5%AE%9E%E4%B9%A0/">工作实习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?324ede2741917bb85c85b33719994175";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-WJ3653XPP1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
