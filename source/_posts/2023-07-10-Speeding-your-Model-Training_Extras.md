@@ -24,143 +24,101 @@ Primarily, to reduce time consumption, it is essential to minimize the first two
 Even with offline pre-processing of data, loading large files still takes time. PyTorch datasets involve loading files from the disk, which inevitably takes some time. However, this issue can be mitigated by using the HDF5 dataset. HDF5 offers a way to store your pre-processed features in its data format. Here's a simple example of how to store your data into an HDF5 file using Python:
 
 ```python
-
-
 import h5py
-
 import numpy as np
 
 with h5py.File("mytestfile.hdf5", "w") as f:
-
-​    dset = f.create_dataset("mydataset", (100,), dtype='i')
+	dset = f.create_dataset("mydataset", (100,), dtype='i')
 ```
 
 However, if you need to process hundreds of gigabytes of data, this method can be slow. In this case, multiprocessing can be used to split all data into several parts and convert them into multiple h5 files. Below is a code example that demonstrates how to split and merge data:
 
 ## Splitting File:
 
+
+
 ```python
-*def* split_scp(*from_path*, *target_path*, *file_num*):
+def split_scp(*from_path*, *target_path*, *file_num*):
+  f = open(from_path, "r")
 
-​    """Splitting big trainging list to multiple file to parallel extract features 
+  lines = f.readlines()  
 
-​    Args:
+  n = math.ceil(len(lines)/file_num)
 
-​        from_path (string): to be splited file path
+  output = [lines[i:i + n] for i in range(0, len(lines), n)]
 
-​        target_path (string): chunk files path
+  for small in range(len(output)):
 
-​        file_num (int): number to be splited
+      print("train"+*str*(small)+".scp: ",len(output[small]))
 
-​    """
+      with open(target_path + "/train"+*str*(small)+".scp", 'w') as f:
 
-​    f = open(from_path, "r")
+          for i in output[small]:
 
-​    lines = f.readlines()  
+              f.write(i)
 
-​    n = math.ceil(len(lines)/file_num)
-
-​    output = [lines[i:i + n] for i in range(0, len(lines), n)]
-
-​    for small in range(len(output)):
-
-​        print("train"+*str*(small)+".scp: ",len(output[small]))
-
-​        with open(target_path + "/train"+*str*(small)+".scp", 'w') as f:
-
-​            for i in output[small]:
-
-​                f.write(i)
-
-​    print("-----split_scp down-----")
+  print("-----split_scp down-----")
 ```
 
 ## Multiprocesss:
 
 ```python
-    split_scp("scp/train_temp.scp", scp_path, process_num)
+split_scp("scp/train_temp.scp", scp_path, process_num)
 
-​    for i in range(*int*(process_num/one_process)):
+for i in range(*int*(process_num/one_process)):
 
-​        processes = []
+    processes = []
 
-​        for i in range(i*one_process, (i+1)*one_process):
+    for i in range(i*one_process, (i+1)*one_process):
 
-​            p = Process(*target*=process_ming,
+        p = Process(*target*=process_ming,
 
-​                        *args*=(scp_path+"/train" + *str*(i) + ".scp", chunk_path+"/train" + *str*(i) + ".h5" ,True))
+                    *args*=(scp_path+"/train" + *str*(i) + ".scp", chunk_path+"/train" + *str*(i) + ".h5" ,True))
 
-​            p.start()
+        p.start()
 
-​            print(f'process '+ *str*(i) +' has started')
+        print(f'process '+ *str*(i) +' has started')
 
-​            processes.append(p)
+        processes.append(p)
 
-​        for p in processes:
+    for p in processes:
 
-​            p.join()
+        p.join()
 ```
 
 ## Cell_Process:
 
 ```python
-*def* process_ming(*scp*, *to_file*, *training*):
-
-​    Multiple proecess to parallel extract feature
+def process_ming(*scp*, *to_file*, *training*):
+	Multiple proecess to parallel extract feature
 ```
 
 ## Merge:
 
 ```python
-*def* h5list2dict(*from_path*, *to_file*):
+def h5list2dict(*from_path*, *to_file*):
+  if not os.path.exists(os.path.dirname(to_file)):
 
-​    """ Combining multiple small h5 files to a whole h5 file
+      os.mkdir(os.path.dirname(to_file))
 
-​    Args:
+  for root, dirs, files in os.walk(from_path):
 
-​        path (string): path that store all small h5 files
+      with h5py.File(os.path.join(root, files[0]), 'r') as f1:
+          attributs = *list*(f1.keys())
+          f1.close()
+      for attribut in attributs:
+          temp=[]
+          for file in sorted(files):
+              with h5py.File(os.path.join(root, file), 'r') as f2:
+                  temp.extend(f2[attribut][...])
+              f2.close()
+          with h5py.File(to_file, "a") as fw:
+              fw[attribut] = temp
 
-​    """
-
-​    if not os.path.exists(os.path.dirname(to_file)):
-
-​        os.mkdir(os.path.dirname(to_file))
-
-​    for root, dirs, files in os.walk(from_path):
-
-​        with h5py.File(os.path.join(root, files[0]), 'r') as f1:
-
-​            attributs = *list*(f1.keys())
-
-​            f1.close()
-
-​        for attribut in attributs:
-
-​            temp=[]
-
-​            for file in sorted(files):
-
-​                with h5py.File(os.path.join(root, file), 'r') as f2:
-
-​                    temp.extend(f2[attribut][...])
-
-​                f2.close()
-
-​            with h5py.File(to_file, "a") as fw:
-
-​                fw[attribut] = temp
-
-​               
-
-​                fw.close()
-
-​          
-
-​            del temp
-
-​            gc.collect()
-
-​    print("-----combining h5 files down-----")
+          fw.close()
+          del temp
+          gc.collect()
+  print("-----combining h5 files down-----")
 ```
 
 ## Virtual Dataset
@@ -169,82 +127,52 @@ Unfortunately, merging multiple h5 files can cause issues when memory size is sc
 
 ```python
 def h5list2virtual(from_path, to_file, file_num):
+  if not os.path.exists(os.path.dirname(to_file)):
+      os.mkdir(os.path.dirname(to_file))
+  total_num=0
 
-​    """ Combining multiple small h5 files to a whole h5 file
+  for root, dirs, files in os.walk(from_path):
+      nowtype=h5py.File(root+"/"+files[0])['mix'].dtype
+      print(nowtype)
+      for i in range(len(files)):
+          total_num+=int(files[i].split("_")[1].split(".")[0])
+  layout1 = h5py.VirtualLayout(shape=(total_num, 4, 64000), dtype=nowtype)
+  layout2 = h5py.VirtualLayout(shape=(total_num, 64000), dtype=nowtype)
 
-​    Args:
+  start_num=0
 
-​        path (string): path that store all small h5 files
+  for root, dirs, files in os.walk(from_path):
+      for i in range(len(files)):
+          now_num = int(files[i].split("_")[1].split(".")[0])
+          now_file = root+"/"+files[i]
+          print("file is: start_number is:",now_file, start_num)
+          layout1[start_num:start_num+now_num, :,:] = h5py.VirtualSource(now_file, 'mix', shape=(now_num, 4,64000))
+          layout2[start_num:start_num+now_num, :] = h5py.VirtualSource(now_file, 'zone0', shape=(now_num, 64000))
+          start_num=start_num+now_num
 
-​    """
+  with h5py.File(to_file, 'w', libver='latest') as f:
 
-​    if not os.path.exists(os.path.dirname(to_file)):
+      f.create_virtual_dataset('mix', layout1)
 
-​        os.mkdir(os.path.dirname(to_file))
-
-​    total_num=0
-
-​    for root, dirs, files in os.walk(from_path):
-
-​        nowtype=h5py.File(root+"/"+files[0])['mix'].dtype
-
-​        print(nowtype)
-
-​        for i in range(len(files)):
-
-​            total_num+=int(files[i].split("_")[1].split(".")[0])
-
-​    layout1 = h5py.VirtualLayout(shape=(total_num, 4, 64000), dtype=nowtype)
-
-​    layout2 = h5py.VirtualLayout(shape=(total_num, 64000), dtype=nowtype)
-
-​    start_num=0
-
-​    for root, dirs, files in os.walk(from_path):
-
-​        for i in range(len(files)):
-
-​            now_num = int(files[i].split("_")[1].split(".")[0])
-
-​            now_file = root+"/"+files[i]
-
-​            print("file is: start_number is:",now_file, start_num)
-
-​      
-
-​            layout1[start_num:start_num+now_num, :,:] = h5py.VirtualSource(now_file, 'mix', shape=(now_num, 4,64000))
-
-​            layout2[start_num:start_num+now_num, :] = h5py.VirtualSource(now_file, 'zone0', shape=(now_num, 64000))
-
-​            start_num=start_num+now_num
-
-​    with h5py.File(to_file, 'w', libver='latest') as f:
-
-​        f.create_virtual_dataset('mix', layout1)
-
-​        f.create_virtual_dataset('zone0', layout2)
-
-​                   
-
-​    print("-----combining h5 files down-----")
+      f.create_virtual_dataset('zone0', layout2)
+      print("-----combining h5 files down-----")
 ```
 
 ## Dataset
 
 ```python
-*class* myDataset(*Dataset*):
+class myDataset(*Dataset*):
+  def __init__(*self*, *file*):
 
-​    *def* __init__(*self*, *file*):
+      *self*.fw=h5py.File(file, 'r')
 
-​        *self*.fw=h5py.File(file, 'r')
+  def __len__(*self*):
 
-​    *def* __len__(*self*):
+      return len(*self*.fw["mix"])
 
-​        return len(*self*.fw["mix"])
+  def __getitem__(*self*, *idx*):
 
-​    *def* __getitem__(*self*, *idx*):
-
-​        return [torch.tensor(*self*.fw["mix"][idx], *dtype*=torch.float32), torch.tensor(*self*.fw["zone0"][idx], *dtype*=torch.float32)]
+      return [torch.tensor(*self*.fw["mix"][idx], *dtype*=torch.float32), torch.tensor(*self*.fw["zone0"][idx], *dtype*=torch.float32)]
 ```
 
 # A Proper DataLoader Worker When Data Processing is Necessary
